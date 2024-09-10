@@ -58,7 +58,10 @@ const Form = () => {
                   />
                   <button
                     className="bg-blue-500 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md ml-2"
-                    onClick={(e) => e.preventDefault()}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setVisible(false);
+                    }}
                   >
                     Submit
                   </button>
