@@ -16,11 +16,14 @@ const SignupModal = ({ closeModal }) => {
       setSignUp(false);
       setError("");
 
-      const response = await axios.post("http://localhost:5000/api/signup", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://railmadad-backend.onrender.com/api/signup",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       if (response.status === 201) {
         setSignUp(true);
