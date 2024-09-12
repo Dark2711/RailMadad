@@ -7,7 +7,8 @@ const SignupModal = ({ closeModal }) => {
   const [password, setPassword] = useState("");
   const [signUp, setSignUp] = useState(false);
   const [error, setError] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false); // New state for password visibility
+  const [passwordVisible, setPasswordVisible] = useState(false); // Password visibility state
+  const [isAdmin, setIsAdmin] = useState(false); // State to differentiate admin signup
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const SignupModal = ({ closeModal }) => {
         name,
         email,
         password,
+        isAdmin, // Send the isAdmin field to the backend
       });
 
       if (response.status === 201) {
@@ -77,6 +79,17 @@ const SignupModal = ({ closeModal }) => {
             >
               {passwordVisible ? "Hide" : "Show"} {/* Toggle button text */}
             </button>
+          </div>
+          <div className="mb-4">
+            <label className="inline-flex items-center">
+              <input
+                type="checkbox"
+                checked={isAdmin}
+                onChange={() => setIsAdmin(!isAdmin)} // Toggle admin state
+                className="form-checkbox"
+              />
+              <span className="ml-2">Sign up as Admin</span>
+            </label>
           </div>
           {signUp && (
             <h3 className="text-green-600">Registered Successfully</h3>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Correct import
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const LoginModal = ({ closeModal, onLoginSuccess, onAdminLogin }) => {
   const [email, setEmail] = useState("");
@@ -8,7 +8,7 @@ const LoginModal = ({ closeModal, onLoginSuccess, onAdminLogin }) => {
   const [error, setError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); // Admin login checkbox
+  const [isAdmin, setIsAdmin] = useState(false); // State to differentiate admin login
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -22,21 +22,16 @@ const LoginModal = ({ closeModal, onLoginSuccess, onAdminLogin }) => {
       });
 
       if (response.status === 200) {
-        const { token, isAdmin: adminFromBackend } = response.data;
-
-        // Store token in localStorage or state management if needed
-        localStorage.setItem("token", token);
-
-        // Handle admin login redirection
-        if (adminFromBackend) {
-          onAdminLogin(); // Call the onAdminLogin function passed via props
-          navigate("/admin"); // Navigate to the admin component
+        if (isAdmin) {
+          // Redirect to admin dashboard
+          onAdminLogin();
+          navigate("/admin");
         } else {
           onLoginSuccess({ email }); // Pass user data to parent component
-          navigate("/"); // Navigate to user dashboard or home
         }
         setLoginSuccess(true);
-        closeModal(); // Close the modal after successful login
+        setError("");
+        closeModal();
       } else {
         setLoginSuccess(false);
         setError("Invalid email or password.");

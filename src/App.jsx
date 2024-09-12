@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Form from "./components/Form";
-import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
 import LoginModal from "./components/LoginModal";
 import SignupModal from "./components/SignupModal";
 import Footer from "./components/Footer";
@@ -10,6 +9,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [user, setUser] = useState(null); // State for user
+  const [isAdmin, setIsAdmin] = useState(false); // State to manage admin login
 
   const openLoginModal = () => setShowLogin(true);
   const closeLoginModal = () => setShowLogin(false);
@@ -19,6 +19,11 @@ function App() {
 
   const handleLoginSuccess = (userData) => {
     setUser(userData); // Set user data after successful login
+    closeLoginModal();
+  };
+
+  const handleAdminLogin = () => {
+    setIsAdmin(true); // Set admin login status
     closeLoginModal();
   };
 
@@ -34,13 +39,16 @@ function App() {
         <LoginModal
           closeModal={closeLoginModal}
           onLoginSuccess={handleLoginSuccess}
+          onAdminLogin={handleAdminLogin} // Pass admin login handler
         />
       )}
 
       {/* Signup Modal */}
       {showSignup && <SignupModal closeModal={closeSignupModal} />}
+
+      {/* The main content, like the Hero component */}
       <Hero />
-      <Form />
+
       <Footer />
     </div>
   );

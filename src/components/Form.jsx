@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import ReferenceIdModal from "./ReferenceIdModal";
 import axios from "axios";
 
 const Form = () => {
@@ -74,6 +77,7 @@ const Form = () => {
   const [visible, setVisible] = useState(false);
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false); // To track if OTP has been sent
   const [formEnabled, setFormEnabled] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [subcategories, setSubcategories] = useState([]);
@@ -81,19 +85,50 @@ const Form = () => {
   const [incidentDate, setIncidentDate] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const [referenceId, setReferenceId] = useState(""); // New state for reference ID
+  const [isModalOpen, setIsModalOpen] = useState(false); // New state for modal visibility
 
   const handleGetOtp = async (e) => {
     e.preventDefault();
-    if (mobile) {
-      setVisible(true);
+    if (email) {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/send-otp",
+          { email }
+        );
+        if (response.data.success) {
+          setVisible(true);
+          setOtpSent(true);
+          alert("OTP has been sent to your email!");
+        }
+      } catch (error) {
+        console.error("Error sending OTP:", error);
+        alert("Failed to send OTP.");
+      }
     }
   };
 
   const handleSubmitOtp = async (e) => {
     e.preventDefault();
     if (otp) {
-      setFormEnabled(true);
-      setVisible(false);
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/verify-otp",
+          { email, otp }
+        );
+        if (response.data.success) {
+          setFormEnabled(true);
+          setVisible(false);
+          alert("OTP verified successfully!");
+        } else {
+          alert("Invalid OTP. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error verifying OTP:", error);
+        alert("OTP verification failed.");
+      }
     }
   };
 
@@ -132,6 +167,7 @@ const Form = () => {
         }
       );
       alert(response.data.message);
+      navigate("/", { state: { referenceId: response.data.referenceId } });
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Error submitting form");
@@ -141,15 +177,24 @@ const Form = () => {
   return (
     <div
       id="form"
-      className="flex justify-center items-center min-h-screen p-4 "
+      className="flex justify-center items-center min-h-screen p-4 bg-blue-200 "
     >
       <div
         id="form-content"
         className="bg-white rounded-lg w-full max-w-4xl p-6 sm:p-10"
       >
-        <h1 className="text-blue-800 text-3xl sm:text-4xl font-bold text-center mb-6">
-          Complaint Details
-        </h1>
+        <div>
+          <div className="flex justify-end">
+            <Link to="/">
+              <button className="text-3xl text-white p-2 w-14 bg-blue-800 rounded-[50%] hover:bg-red-600">
+                <i className="ri-close-large-line"></i>
+              </button>
+            </Link>
+          </div>
+          <h1 className="text-blue-800 text-3xl sm:text-4xl font-bold text-center mb-6">
+            Complaint Details
+          </h1>
+        </div>
         <form
           onSubmit={handleSubmitForm}
           className="flex flex-col sm:flex-row justify-evenly font-medium text-gray-600 space-y-6 sm:space-y-0 sm:space-x-6"
@@ -157,19 +202,19 @@ const Form = () => {
           <div id="left" className="flex flex-col space-y-6 w-full sm:w-1/2">
             <div id="mobile">
               <label htmlFor="mobile-num" className="text-lg flex flex-col">
-                Mobile No.
+                Email
               </label>
               <input
                 type="text"
                 id="mobile-num"
-                placeholder="Enter Mobile No."
+                placeholder="Enter Email ID"
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 required
                 className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
               />
               <button
-                className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md"
+                className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 ml-2 mt-2 rounded-md"
                 onClick={handleGetOtp}
               >
                 Get OTP
@@ -291,6 +336,7 @@ const Form = () => {
             </div>
 
             <div id="submit" className="flex space-x-4">
+              {/* <Link to="/"> */}
               <button
                 type="submit"
                 className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 rounded-md"
@@ -298,6 +344,7 @@ const Form = () => {
               >
                 Submit
               </button>
+              {/* </Link> */}
               <button
                 type="reset"
                 className="bg-blue-300 hover:bg-red-800 hover:text-white px-6 py-2 rounded-md"
@@ -317,8 +364,28 @@ const Form = () => {
                 Reset
               </button>
             </div>
+            {/* {isModalOpen && (
+              <div className="modal bg-gray-500 text-white rounded-lg">
+                <div className="modal-content">
+                  <h2>Complaint Submitted</h2>
+                  <p>Your complaint reference ID is: {referenceId}</p>
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="bg-blue-400"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )} */}
           </div>
         </form>
+        {/* Reference ID Modal */}
+        <ReferenceIdModal
+          isOpen={isModalOpen}
+          referenceId={referenceId}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </div>
   );
