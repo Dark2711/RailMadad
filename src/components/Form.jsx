@@ -95,7 +95,7 @@ const Form = () => {
 
     setVisible(true);
     setOtpSent(true);
-    // alert("OTP has been sent to your email!");
+    alert("OTP has been sent to your email!");
   };
 
   const handleSubmitOtp = async (e) => {
@@ -173,12 +173,12 @@ const Form = () => {
           <div id="left" className="flex flex-col space-y-6 w-full sm:w-1/2">
             <div id="mobile">
               <label htmlFor="mobile-num" className="text-lg flex flex-col">
-                Email
+                Email/ Mobile No.
               </label>
               <input
                 type="text"
                 id="mobile-num"
-                placeholder="Enter Email ID"
+                placeholder="Enter Email Id/Mobile No."
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 required
