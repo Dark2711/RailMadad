@@ -335,20 +335,6 @@ const Form = () => {
                 Reset
               </button>
             </div>
-            {/* {isModalOpen && (
-              <div className="modal bg-gray-500 text-white rounded-lg">
-                <div className="modal-content">
-                  <h2>Complaint Submitted</h2>
-                  <p>Your complaint reference ID is: {referenceId}</p>
-                  <button
-                    onClick={() => setIsModalOpen(false)}
-                    className="bg-blue-400"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            )} */}
           </div>
         </form>
         {/* Reference ID Modal */}
