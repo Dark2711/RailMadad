@@ -85,7 +85,6 @@ const Form = () => {
   const handleGetOtp = async (e) => {
     e.preventDefault();
     if (mobile) {
-      // Simulate OTP generation (In a real scenario, this would be handled by the backend)
       setVisible(true);
     }
   };
@@ -93,9 +92,8 @@ const Form = () => {
   const handleSubmitOtp = async (e) => {
     e.preventDefault();
     if (otp) {
-      // Simulate OTP verification (In a real scenario, this would be handled by the backend)
       setFormEnabled(true);
-      setVisible(false); // Hide OTP box after submission
+      setVisible(false);
     }
   };
 
@@ -134,7 +132,6 @@ const Form = () => {
         }
       );
       alert(response.data.message);
-      // Optionally clear the form or handle success
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Error submitting form");
@@ -144,7 +141,7 @@ const Form = () => {
   return (
     <div
       id="form"
-      className="flex justify-center items-center min-h-screen p-4"
+      className="flex justify-center items-center min-h-screen p-4 "
     >
       <div
         id="form-content"
@@ -155,12 +152,9 @@ const Form = () => {
         </h1>
         <form
           onSubmit={handleSubmitForm}
-          action=""
-          method="POST"
-          encType="multipart/form-data" // Add this attribute
-          className="flex flex-col sm:flex-row justify-evenly font-medium text-gray-600 font-poppins space-y-6 sm:space-y-0 sm:space-x-6"
+          className="flex flex-col sm:flex-row justify-evenly font-medium text-gray-600 space-y-6 sm:space-y-0 sm:space-x-6"
         >
-          <div id="left" className="flex flex-col space-y-6">
+          <div id="left" className="flex flex-col space-y-6 w-full sm:w-1/2">
             <div id="mobile">
               <label htmlFor="mobile-num" className="text-lg flex flex-col">
                 Mobile No.
@@ -175,7 +169,7 @@ const Form = () => {
                 className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
               />
               <button
-                className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md ml-2"
+                className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md"
                 onClick={handleGetOtp}
               >
                 Get OTP
@@ -193,7 +187,7 @@ const Form = () => {
                     className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
                   />
                   <button
-                    className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md ml-2"
+                    className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md"
                     onClick={handleSubmitOtp}
                   >
                     Submit
@@ -226,7 +220,7 @@ const Form = () => {
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                   disabled={!formEnabled}
-                  className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
+                  className="rounded-md px-4 w-60 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
                 >
                   <option value="">Select a category</option>
                   {Object.keys(categories).map((item) => (
@@ -266,7 +260,7 @@ const Form = () => {
                 disabled={!formEnabled}
                 className="px-4 py-2 rounded-md w-full border-[3px] focus:shadow-2xl"
               />
-              <label htmlFor="file-upload" className="text-lg flex mt-4 ">
+              <label htmlFor="file-upload" className="text-lg flex mt-4">
                 Upload File
               </label>
               <div className="bg-white rounded-md">
@@ -275,32 +269,32 @@ const Form = () => {
                   id="file-upload"
                   onChange={handleFileChange}
                   disabled={!formEnabled}
-                  className="px-4 py-2 w-full border-[2px] rounded-md focus:shadow-2xl"
+                  className="file:border file:border-gray-300 file:py-2 file:px-4 file:rounded-md file:bg-blue-100 file:text-blue-700 file:cursor-pointer"
                 />
               </div>
             </div>
           </div>
 
-          <div id="right" className="flex flex-col space-y-6">
-            <div id="description">
+          <div id="right" className="flex flex-col space-y-6 w-full sm:w-1/2">
+            <div id="description" className="flex flex-col space-y-4">
               <label htmlFor="description" className="text-lg flex">
                 Description <span className="text-red-700">*</span>
               </label>
               <textarea
                 id="description"
-                cols="40"
-                rows="10"
+                rows="4"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 disabled={!formEnabled}
-                className="rounded-md px-4 py-2 resize-none w-full border-[3.5px] focus:shadow-2xl"
-              ></textarea>
+                className="rounded-md px-4 py-2 border outline-blue-500 focus:shadow-md"
+              />
             </div>
 
             <div id="submit" className="flex space-x-4">
               <button
                 type="submit"
                 className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 rounded-md"
+                disabled={!formEnabled}
               >
                 Submit
               </button>
