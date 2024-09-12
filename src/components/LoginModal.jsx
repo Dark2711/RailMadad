@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Correct import
 import axios from "axios";
 
-const LoginModal = ({ closeModal, onLoginSuccess, onAdminLogin }) => {
+const LoginModal = ({ closeModal, onLoginSuccess }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

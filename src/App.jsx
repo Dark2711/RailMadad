@@ -21,10 +21,6 @@ function App() {
     closeLoginModal();
   };
 
-  const handleAdminLogin = () => {
-    closeLoginModal();
-  };
-
   return (
     <div className="bg-[url('./assets/bg-2.jpg')] bg-fixed bg-center ">
       <Navbar
@@ -37,7 +33,6 @@ function App() {
         <LoginModal
           closeModal={closeLoginModal}
           onLoginSuccess={handleLoginSuccess}
-          onAdminLogin={handleAdminLogin} // Pass admin login handler
         />
       )}
 
