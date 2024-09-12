@@ -7,16 +7,23 @@
       type="image/svg+xml"
       href="./src/assets/ugd7_jwzm_220317.jpg"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RailMadad</title>
     <style>
       /* Chatbot toggle button */
       #chatbot-toggle-button {
+        /* background-image: url(./chat-logo.png); */
+        object-fit: cover;
+        background-repeat: no-repeat;
         position: fixed;
         bottom: 20px;
         right: 20px;
-        background-color: #007bff;
-        color: white;
+        background-color: white;
+        color: black;
         border: none;
         border-radius: 50%; /* Circular button */
         padding: 15px 20px;
@@ -33,10 +40,14 @@
 
       /* Hover effect: background color and slight scale change */
       #chatbot-toggle-button:hover {
-        background-color: #0056b3;
+        background-color: gray;
         transform: scale(1.1); /* Scale up slightly when hovering */
       }
 
+      img {
+        height: 100%;
+        width: 100%;
+      }
       /* Bounce animation keyframes */
       @keyframes bounce {
         0%,
@@ -57,7 +68,10 @@
   </head>
   <body>
     <div id="root"></div>
-    <button id="chatbot-toggle-button">BOT HELP</button>
+    <button id="chatbot-toggle-button">
+      <img src="./customer-service.png" alt="" />
+      <!-- <i class="ri-customer-service-2-fill"></i> -->
+    </button>
 
     <script type="module" src="/src/main.jsx"></script>
 

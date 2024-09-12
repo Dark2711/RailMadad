@@ -148,7 +148,7 @@ const Form = () => {
     >
       <div
         id="form-content"
-        className="bg-blue-400 rounded-lg w-full max-w-4xl p-6 sm:p-10"
+        className="bg-white rounded-lg w-full max-w-4xl p-6 sm:p-10"
       >
         <h1 className="text-blue-800 text-3xl sm:text-4xl font-bold text-center mb-6">
           Complaint Details
@@ -168,13 +168,14 @@ const Form = () => {
               <input
                 type="text"
                 id="mobile-num"
+                placeholder="Enter Mobile No."
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 required
-                className="rounded-md px-4 py-2 border-none outline-blue-500"
+                className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
               />
               <button
-                className="bg-blue-500 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md ml-2"
+                className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md ml-2"
                 onClick={handleGetOtp}
               >
                 Get OTP
@@ -189,10 +190,10 @@ const Form = () => {
                     id="otp"
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
-                    className="rounded-md px-4 py-2 border-none outline-blue-500"
+                    className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
                   />
                   <button
-                    className="bg-blue-500 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md ml-2"
+                    className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 mt-2 rounded-md ml-2"
                     onClick={handleSubmitOtp}
                   >
                     Submit
@@ -211,7 +212,7 @@ const Form = () => {
                 value={pnr}
                 onChange={(e) => setPnr(e.target.value)}
                 disabled={!formEnabled}
-                className="rounded-md px-4 py-2 border-none outline-blue-500"
+                className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
               />
             </div>
 
@@ -225,7 +226,7 @@ const Form = () => {
                   value={selectedCategory}
                   onChange={handleCategoryChange}
                   disabled={!formEnabled}
-                  className="rounded-md px-4 py-2 border-none outline-blue-500"
+                  className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
                 >
                   <option value="">Select a category</option>
                   {Object.keys(categories).map((item) => (
@@ -241,7 +242,7 @@ const Form = () => {
                 <select
                   id="sub-type"
                   disabled={!formEnabled}
-                  className="rounded-md px-4 py-2 border-none outline-blue-500"
+                  className="rounded-md px-4 py-2 border-[3px] outline-blue-500 focus:shadow-2xl"
                 >
                   <option value="">Select a subcategory</option>
                   {subcategories.map((item) => (
@@ -263,9 +264,9 @@ const Form = () => {
                 value={incidentDate}
                 onChange={(e) => setIncidentDate(e.target.value)}
                 disabled={!formEnabled}
-                className="px-4 py-2 rounded-md w-full"
+                className="px-4 py-2 rounded-md w-full border-[3px] focus:shadow-2xl"
               />
-              <label htmlFor="file-upload" className="text-lg flex mt-4">
+              <label htmlFor="file-upload" className="text-lg flex mt-4 ">
                 Upload File
               </label>
               <div className="bg-white rounded-md">
@@ -274,7 +275,7 @@ const Form = () => {
                   id="file-upload"
                   onChange={handleFileChange}
                   disabled={!formEnabled}
-                  className="px-4 py-2 w-full"
+                  className="px-4 py-2 w-full border-[2px] rounded-md focus:shadow-2xl"
                 />
               </div>
             </div>
@@ -292,20 +293,20 @@ const Form = () => {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 disabled={!formEnabled}
-                className="rounded-md px-4 py-2 resize-none w-full"
+                className="rounded-md px-4 py-2 resize-none w-full border-[3.5px] focus:shadow-2xl"
               ></textarea>
             </div>
 
             <div id="submit" className="flex space-x-4">
               <button
                 type="submit"
-                className="bg-blue-500 hover:bg-blue-800 hover:text-white px-6 py-2 rounded-md"
+                className="bg-blue-300 hover:bg-blue-800 hover:text-white px-6 py-2 rounded-md"
               >
                 Submit
               </button>
               <button
                 type="reset"
-                className="bg-blue-500 hover:bg-red-800 hover:text-white px-6 py-2 rounded-md"
+                className="bg-blue-300 hover:bg-red-800 hover:text-white px-6 py-2 rounded-md"
                 onClick={() => {
                   setMobile("");
                   setOtp("");

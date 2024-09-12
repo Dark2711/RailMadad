@@ -7,10 +7,10 @@ const Hero = () => {
       className="h-screen font-poppins  flex flex-col justify-center items-center"
     >
       <div id="hero-content" className="text-center px-4 sm:px-8">
-        <h1 className="text-4xl sm:text-6xl font-bold text-blue-800 leading-tight">
+        <h1 className="text-4xl sm:text-6xl font-bold text-blue-600 leading-tight">
           Welcome to RailMadad
         </h1>
-        <p className="text-lg sm:text-2xl text-blue-600 mt-2 sm:mt-4">
+        <p className="text-lg sm:text-2xl text-white mt-2 sm:mt-4">
           For complaints, Inquiry & Assistance
         </p>
         <a href="#form">
