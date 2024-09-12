@@ -137,7 +137,7 @@ const Form = () => {
           },
         }
       );
-      alert(response.data.message);
+      // alert(response.data.message);
       navigate("/", { state: { referenceId: response.data.referenceId } });
     } catch (error) {
       console.error("Error submitting form:", error);

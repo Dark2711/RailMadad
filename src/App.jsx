@@ -9,7 +9,6 @@ function App() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [user, setUser] = useState(null); // State for user
-  const [isAdmin, setIsAdmin] = useState(false); // State to manage admin login
 
   const openLoginModal = () => setShowLogin(true);
   const closeLoginModal = () => setShowLogin(false);
@@ -23,7 +22,6 @@ function App() {
   };
 
   const handleAdminLogin = () => {
-    setIsAdmin(true); // Set admin login status
     closeLoginModal();
   };
 

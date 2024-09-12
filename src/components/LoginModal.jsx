@@ -8,7 +8,7 @@ const LoginModal = ({ closeModal, onLoginSuccess, onAdminLogin }) => {
   const [error, setError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false); // Admin login checkbox
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -22,19 +22,9 @@ const LoginModal = ({ closeModal, onLoginSuccess, onAdminLogin }) => {
       });
 
       if (response.status === 200) {
-        const { token, isAdmin: adminFromBackend } = response.data;
+        onLoginSuccess({ email }); // Pass user data to parent component
+        navigate("/"); // Navigate to user dashboard or home
 
-        // Store token in localStorage or state management if needed
-        localStorage.setItem("token", token);
-
-        // Handle admin login redirection
-        if (adminFromBackend) {
-          onAdminLogin(); // Call the onAdminLogin function passed via props
-          navigate("/admin"); // Navigate to the admin component
-        } else {
-          onLoginSuccess({ email }); // Pass user data to parent component
-          navigate("/"); // Navigate to user dashboard or home
-        }
         setLoginSuccess(true);
         closeModal(); // Close the modal after successful login
       } else {
@@ -86,17 +76,6 @@ const LoginModal = ({ closeModal, onLoginSuccess, onAdminLogin }) => {
           >
             Login
           </button>
-          <div className="mt-4">
-            <label className="inline-flex items-center">
-              <input
-                type="checkbox"
-                checked={isAdmin}
-                onChange={() => setIsAdmin(!isAdmin)}
-                className="form-checkbox"
-              />
-              <span className="ml-2">Admin Login</span>
-            </label>
-          </div>
         </form>
         <button
           className="mt-4 px-4 py-2 bg-gray-500 text-white rounded w-full hover:bg-gray-600 transition duration-300"
