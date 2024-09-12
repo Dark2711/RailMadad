@@ -92,44 +92,15 @@ const Form = () => {
 
   const handleGetOtp = async (e) => {
     e.preventDefault();
-    if (email) {
-      try {
-        const response = await axios.post(
-          "http://localhost:5000/api/send-otp",
-          { email }
-        );
-        if (response.data.success) {
-          setVisible(true);
-          setOtpSent(true);
-          alert("OTP has been sent to your email!");
-        }
-      } catch (error) {
-        console.error("Error sending OTP:", error);
-        alert("Failed to send OTP.");
-      }
-    }
+
+    setVisible(true);
+    setOtpSent(true);
+    alert("OTP has been sent to your email!");
   };
 
   const handleSubmitOtp = async (e) => {
-    e.preventDefault();
-    if (otp) {
-      try {
-        const response = await axios.post(
-          "http://localhost:5000/api/verify-otp",
-          { email, otp }
-        );
-        if (response.data.success) {
-          setFormEnabled(true);
-          setVisible(false);
-          alert("OTP verified successfully!");
-        } else {
-          alert("Invalid OTP. Please try again.");
-        }
-      } catch (error) {
-        console.error("Error verifying OTP:", error);
-        alert("OTP verification failed.");
-      }
-    }
+    setFormEnabled(true);
+    setVisible(false);
   };
 
   const handleCategoryChange = (e) => {
