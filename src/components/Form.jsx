@@ -6,6 +6,12 @@ import axios from "axios";
 
 const Form = () => {
   const categories = {
+    "Seat Occupancy": [
+      "Someone Claiming Your Seat",
+      "Want to exchange seat",
+      "Without Reservation",
+      "Others",
+    ],
     "Medical Assistance": ["Medical Assistance"],
     Security: [
       "Eve-teasing/Misbehaviour with lady passengers/Rape",
