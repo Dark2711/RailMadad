@@ -10,7 +10,7 @@ const AdminComponent = () => {
     const fetchComplaints = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/complaints"
+          "https://railmadad-backend.onrender.com/api/complaints"
         ); // Adjust the URL based on your backend setup
         console.log(response);
 
